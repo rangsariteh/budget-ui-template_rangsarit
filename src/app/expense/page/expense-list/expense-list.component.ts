@@ -36,6 +36,11 @@ import { addIcons } from 'ionicons';
 import { add, alertCircleOutline, arrowBack, arrowForward, pricetag, search, swapVertical } from 'ionicons/icons';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
+function openModal() {}
+
+openModal();
+{
+}
 @Component({
   selector: 'app-expense-list',
   templateUrl: './expense-list.component.html',
