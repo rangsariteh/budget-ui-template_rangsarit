@@ -17,7 +17,7 @@ import {
   IonRefresherContent,
   IonSelect,
   IonInput,
-  IonSelectOption
+  IonSelectOption, IonButtons, IonTitle, IonMenuButton, IonList, IonFab, IonFabButton
 } from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular/standalone';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -54,7 +54,13 @@ import { debounce } from 'rxjs/operators';
     IonRefresherContent,
     IonSelect,
     IonInput,
-    IonSelectOption
+    IonSelectOption,
+    IonButtons,
+    IonTitle,
+    IonMenuButton,
+    IonList,
+    IonFab,
+    IonFabButton
   ]
 })
 export default class CategoryListComponent implements OnDestroy {

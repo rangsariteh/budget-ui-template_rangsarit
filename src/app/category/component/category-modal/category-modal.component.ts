@@ -10,7 +10,10 @@ import {
   ViewWillEnter,
   IonHeader,
   IonToolbar,
-  IonTitle
+  IonTitle,
+  IonButtons,
+  IonFab,
+  IonFabButton
 } from '@ionic/angular/standalone';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
@@ -28,7 +31,20 @@ import { mergeMap } from 'rxjs';
   selector: 'app-category-modal',
   templateUrl: './category-modal.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, IonButton, IonIcon, IonContent, IonItem, IonInput, IonHeader, IonToolbar, IonTitle]
+  imports: [
+    ReactiveFormsModule,
+    IonButton,
+    IonIcon,
+    IonContent,
+    IonItem,
+    IonInput,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonFab,
+    IonFabButton
+  ]
 })
 export default class CategoryModalComponent implements ViewWillEnter, ViewDidEnter {
   // DI

@@ -12,7 +12,6 @@ import {
   IonButtons,
   IonChip,
   IonContent,
-  IonFooter,
   IonIcon,
   IonItem,
   IonLabel,
@@ -22,7 +21,8 @@ import {
   IonMenuToggle,
   IonRouterOutlet,
   IonSplitPane,
-  IonToolbar
+  IonToolbar,
+  IonFooter
 } from '@ionic/angular/standalone';
 import { AuthService } from './shared/service/auth.service';
 import { UpdateService } from './shared/service/update.service';
@@ -50,11 +50,11 @@ import { UpdateService } from './shared/service/update.service';
     IonMenuToggle,
     IonItem,
     IonIcon,
-    IonFooter,
     IonToolbar,
     IonButtons,
     IonButton,
-    IonRouterOutlet
+    IonRouterOutlet,
+    IonFooter
   ]
 })
 export default class AppComponent {
