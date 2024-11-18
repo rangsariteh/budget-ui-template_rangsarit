@@ -24,24 +24,23 @@
           }
         </ion-list>
       </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons>
+            @if (authService.currentUser() | async) {
+              <ion-button (click)="authService.logout()" color="primary">
+                <ion-icon class="ion-padding-end" name="log-out" />
+                Logout
+              </ion-button>
+            }
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
     </ion-menu>
-
     <!-- Router Outlet -->
     <ion-router-outlet id="main-content" />
   </ion-split-pane>
   <!-- Logout Button -->
-  <ion-footer>
-    <ion-toolbar>
-      <ion-buttons>
-        @if (authService.currentUser() | async) {
-          <ion-button (click)="authService.logout()" color="primary">
-            <ion-icon class="ion-padding-end" name="log-out" />
-            Logout
-          </ion-button>
-        }
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
 </ion-app>
 
 
