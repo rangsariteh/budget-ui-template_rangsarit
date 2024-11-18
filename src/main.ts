@@ -1,4 +1,4 @@
-import { DEFAULT_CURRENCY_CODE, enableProdMode, LOCALE_ID } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, enableProdMode, LOCALE_ID, isDevMode } from '@angular/core';
 
 import { environment } from './environments/environment';
 import locale from '@angular/common/locales/de-CH';
@@ -12,6 +12,7 @@ import AppComponent from './app/app.component';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { authInterceptor } from './app/shared/interceptor/auth.interceptor';
+import { provideServiceWorker } from '@angular/service-worker';
 
 if (environment.backendURL) enableProdMode();
 
@@ -27,6 +28,10 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideHttpClient(),
     provideIonicAngular(),
-    provideRouter(appRoutes, withPreloading(PreloadAllModules))
+    provideRouter(appRoutes, withPreloading(PreloadAllModules)),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ]
 }).catch(err => console.error(err));
