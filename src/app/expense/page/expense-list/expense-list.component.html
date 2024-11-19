@@ -45,11 +45,11 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="md">
-        <ion-list role="list" class="md list-md">
-          <ion-item class="item-has-start-slot item md item-lines-default in-list item-label" role="listitem">
-            <ion-icon slot="start" name="alert-circle-outline" role="img" class="md"> </ion-icon>
-            <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md"> No expenses found </ion-label>
+      <ion-col>
+        <ion-list role="list">
+          <ion-item role="listitem">
+            <ion-icon slot="start" name="alert-circle-outline" role="img"> </ion-icon>
+            <ion-label> No expenses found </ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -63,3 +63,17 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+<ion-footer role="contentinfo">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button>
+      <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>"November 2024"</ion-title>
+    <ion-buttons>
+      <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

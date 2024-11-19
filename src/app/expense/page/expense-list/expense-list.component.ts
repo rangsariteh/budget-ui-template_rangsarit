@@ -35,7 +35,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { add, alertCircleOutline, arrowBack, arrowForward, pricetag, search, swapVertical } from 'ionicons/icons';
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import CategoryModalComponent from '../../../category/component/category-modal/category-modal.component';
 import ExpenseModalComponent from '../../component/expense-modal/expense-modal.component';
 
 @Component({
@@ -95,7 +94,7 @@ export default class ExpenseListComponent {
 
   async OpenModal(): Promise<void> {
     const modal = await this.modalCtrl.create({ component: ExpenseModalComponent });
-    modal.present();
+    await modal.present();
     const { role } = await modal.onWillDismiss();
     if (role === 'refresh') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -103,6 +102,4 @@ export default class ExpenseListComponent {
       this.reloadCategories();
     }
   }
-
-  protected readonly ExpenseModalComponent = ExpenseModalComponent;
 }

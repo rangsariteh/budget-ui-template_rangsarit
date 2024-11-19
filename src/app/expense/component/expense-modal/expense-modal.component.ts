@@ -15,6 +15,7 @@ import {
   IonLabel,
   IonModal,
   IonNote,
+  IonRippleEffect,
   IonSelect,
   IonSelectOption,
   IonTitle,
@@ -52,7 +53,8 @@ import CategoryModalComponent from '../../../category/component/category-modal/c
     IonModal,
     IonDatetime,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    IonRippleEffect
   ]
 })
 export default class ExpenseModalComponent {

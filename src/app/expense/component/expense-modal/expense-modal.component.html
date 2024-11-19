@@ -39,11 +39,18 @@
   </ion-item>
   <ion-item>
     <ion-icon name="cash" slot="start" />
-    <ion-input maxlength="40" placeholder="Amount" required="true" />
+    <ion-input placeholder="Amount" inputmode="decimal" required="true" type="number" formControlName="amount" />
+    <ion-note slot="end">CHF</ion-note>
   </ion-item>
   <ion-item>
-    <ion-icon name="calendar" slot="start" />
-    <ion-input maxlength="40" placeholder="Today" required="true" />
+    <ion-icon name="calendar" />
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime" hour-cycle="h24"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </ion-item>
 
   <!-- Delete Button -->
