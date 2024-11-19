@@ -35,12 +35,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { add, alertCircleOutline, arrowBack, arrowForward, pricetag, search, swapVertical } from 'ionicons/icons';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import CategoryModalComponent from '../../../category/component/category-modal/category-modal.component';
+import ExpenseModalComponent from '../../component/expense-modal/expense-modal.component';
 
-function openModal() {}
-
-openModal();
-{
-}
 @Component({
   selector: 'app-expense-list',
   templateUrl: './expense-list.component.html',
@@ -95,4 +92,17 @@ export default class ExpenseListComponent {
   addMonths = (number: number): void => {
     this.date = addMonths(this.date, number);
   };
+
+  async OpenModal(): Promise<void> {
+    const modal = await this.modalCtrl.create({ component: ExpenseModalComponent });
+    modal.present();
+    const { role } = await modal.onWillDismiss();
+    if (role === 'refresh') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      this.reloadCategories();
+    }
+  }
+
+  protected readonly ExpenseModalComponent = ExpenseModalComponent;
 }
