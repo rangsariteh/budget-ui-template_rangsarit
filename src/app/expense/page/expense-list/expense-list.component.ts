@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { addMonths, set } from 'date-fns';
 import {
+  IonApp,
   IonButton,
   IonButtons,
   IonCol,
@@ -19,6 +20,7 @@ import {
   IonItemGroup,
   IonLabel,
   IonList,
+  IonMenu,
   IonMenuButton,
   IonProgressBar,
   IonRefresher,
@@ -74,7 +76,9 @@ import ExpenseModalComponent from '../../component/expense-modal/expense-modal.c
     IonFab,
     IonFabButton,
     IonFooter,
-    IonButton
+    IonButton,
+    IonMenu,
+    IonApp
   ]
 })
 export default class ExpenseListComponent {

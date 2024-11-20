@@ -43,13 +43,11 @@
     <ion-note slot="end">CHF</ion-note>
   </ion-item>
   <ion-item>
-    <ion-icon name="calendar" />
+    <ion-icon name="calendar" slot="start" />
     <ion-datetime-button datetime="datetime"></ion-datetime-button>
 
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime id="datetime" hour-cycle="h24"></ion-datetime>
-      </ng-template>
+    <ion-modal>
+      <ion-datetime id="datetime"></ion-datetime>
     </ion-modal>
   </ion-item>
 

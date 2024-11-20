@@ -1,31 +1,35 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewChild, inject, Input } from '@angular/core';
 import {
   IonButton,
-  IonButtons,
-  IonChip,
   IonContent,
-  IonDatetime,
-  IonDatetimeButton,
-  IonFab,
-  IonFabButton,
-  IonHeader,
   IonIcon,
   IonInput,
   IonItem,
-  IonLabel,
-  IonModal,
-  IonNote,
-  IonRippleEffect,
-  IonSelect,
-  IonSelectOption,
-  IonTitle,
+  ModalController,
+  ViewDidEnter,
+  ViewWillEnter,
+  IonHeader,
   IonToolbar,
-  ModalController
+  IonTitle,
+  IonButtons,
+  IonFab,
+  IonFabButton,
+  IonDatetimeButton,
+  IonNote,
+  IonModal,
+  IonDatetime
 } from '@ionic/angular/standalone';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { addIcons } from 'ionicons';
-import { add, calendar, cash, close, pricetag, save, text, trash } from 'ionicons/icons';
-import CategoryModalComponent from '../../../category/component/category-modal/category-modal.component';
+import { close, save, text, trash, pricetag, calendar, cash } from 'ionicons/icons';
+import { finalize } from 'rxjs/operators';
+import { CategoryService } from '../../service/expense.service$';
+import { LoadingIndicatorService } from '../../../shared/service/loading-indicator.service';
+import { ToastService } from '../../../shared/service/toast.service';
+import { Category, CategoryUpsertDto } from '../../../shared/domain';
+import { ActionSheetService } from '../../../shared/service/action-sheet.service';
+import { mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-expense-modal',
@@ -33,37 +37,54 @@ import CategoryModalComponent from '../../../category/component/category-modal/c
   standalone: true,
   imports: [
     ReactiveFormsModule,
-
-    // Ionic
-    IonHeader,
-    IonToolbar,
-    IonButtons,
     IonButton,
     IonIcon,
-    IonTitle,
     IonContent,
     IonItem,
     IonInput,
-    IonChip,
-    IonLabel,
-    IonSelect,
-    IonSelectOption,
-    IonNote,
-    IonDatetimeButton,
-    IonModal,
-    IonDatetime,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
     IonFab,
     IonFabButton,
-    IonRippleEffect
+    IonDatetimeButton,
+    IonNote,
+    IonModal,
+    IonDatetime
   ]
 })
-export default class ExpenseModalComponent {
+export default class CategoryModalComponent implements ViewWillEnter, ViewDidEnter {
   // DI
+  private readonly categoryService = inject(CategoryService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly loadingIndicatorService = inject(LoadingIndicatorService);
   private readonly modalCtrl = inject(ModalController);
+  private readonly toastService = inject(ToastService);
+  private readonly actionSheetService = inject(ActionSheetService);
+
+  // Form initialization
+  readonly categoryForm = this.formBuilder.group({
+    id: [null! as string], // hidden
+    name: ['', [Validators.required, Validators.maxLength(40)]]
+  });
+
+  // ViewChild for IonInput
+  @ViewChild('nameInput') nameInput?: IonInput;
+
+  // Passed into the component by the ModalController, available in ionViewWillEnter
+  @Input() category: Category = {} as Category;
 
   constructor() {
-    // Add all used Ionic icons
-    addIcons({ close, save, text, pricetag, add, cash, calendar, trash });
+    addIcons({ close, save, text, trash, pricetag, calendar, cash });
+  }
+
+  ionViewDidEnter(): void {
+    this.nameInput?.setFocus();
+  }
+
+  ionViewWillEnter(): void {
+    this.categoryForm.patchValue(this.category);
   }
 
   cancel(): void {
@@ -71,17 +92,36 @@ export default class ExpenseModalComponent {
   }
 
   save(): void {
-    this.modalCtrl.dismiss(null, 'save');
+    this.loadingIndicatorService.showLoadingIndicator({ message: 'Saving category' }).subscribe(loadingIndicator => {
+      const category = this.categoryForm.value as CategoryUpsertDto;
+      this.categoryService
+        .upsertCategory(category)
+        .pipe(finalize(() => loadingIndicator.dismiss()))
+        .subscribe({
+          next: () => {
+            this.toastService.displaySuccessToast('Category saved');
+            this.modalCtrl.dismiss(null, 'refresh');
+          },
+          error: error => this.toastService.displayWarningToast('Could not save category', error)
+        });
+    });
   }
 
   delete(): void {
-    this.modalCtrl.dismiss(null, 'delete');
-  }
-
-  async showCategoryModal(): Promise<void> {
-    const categoryModal = await this.modalCtrl.create({ component: CategoryModalComponent });
-    categoryModal.present();
-    const { role } = await categoryModal.onWillDismiss();
-    console.log('role', role);
+    this.actionSheetService
+      .showDeletionConfirmation('Are you sure you want to delete this category?')
+      .pipe(mergeMap(() => this.loadingIndicatorService.showLoadingIndicator({ message: 'Deleting category' })))
+      .subscribe(loadingIndicator => {
+        this.categoryService
+          .deleteCategory(this.category.id!)
+          .pipe(finalize(() => loadingIndicator.dismiss()))
+          .subscribe({
+            next: () => {
+              this.toastService.displaySuccessToast('Category deleted');
+              this.modalCtrl.dismiss(null, 'refresh');
+            },
+            error: error => this.toastService.displayWarningToast('Could not delete category', error)
+          });
+      });
   }
 }
