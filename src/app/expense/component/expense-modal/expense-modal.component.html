@@ -30,26 +30,28 @@
 <ion-content class="ion-padding">
   <!-- Input -->
   <ion-item>
-    <ion-icon name="text" slot="start" />
-    <ion-input maxlength="40" placeholder="Name" required="true" />
+    <ion-icon name="text" slot="start"></ion-icon>
+    <ion-input formControlName="name" maxlength="40" placeholder="Name" required="true"></ion-input>
   </ion-item>
+
   <ion-item>
-    <ion-icon name="pricetag" slot="start" />
-    <ion-input maxlength="40" placeholder="Category" required="true" />
+    <ion-icon name="pricetag" slot="start"></ion-icon>
+    <ion-input formControlName="category" maxlength="40" placeholder="Category" required="true"></ion-input>
   </ion-item>
+
   <ion-item>
-    <ion-icon name="cash" slot="start" />
-    <ion-input placeholder="Amount" inputmode="decimal" required="true" type="number" formControlName="amount" />
+    <ion-icon name="cash" slot="start"></ion-icon>
+    <ion-input formControlName="amount" placeholder="Amount" inputmode="decimal" required="true" type="number"></ion-input>
     <ion-note slot="end">CHF</ion-note>
   </ion-item>
-  <ion-item>
-    <ion-icon name="calendar" slot="start" />
-    <ion-datetime-button datetime="datetime"></ion-datetime-button>
 
+  <!-- <ion-item>
+    <ion-icon name="calendar" slot="start"></ion-icon>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
     <ion-modal>
-      <ion-datetime id="datetime"></ion-datetime>
+      <ion-datetime id="datetime" formControlName="date"></ion-datetime>
     </ion-modal>
-  </ion-item>
+  </ion-item> -->
 
   <!-- Delete Button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

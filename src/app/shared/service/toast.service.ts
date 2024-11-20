@@ -7,6 +7,7 @@ import { checkmark, close, warning } from 'ionicons/icons';
 @Injectable({ providedIn: 'root' })
 export class ToastService {
   private readonly toastController = inject(ToastController);
+  private _pleaseFillAllRequiredFields: string | undefined;
 
   constructor() {
     addIcons({ checkmark, close, warning });
@@ -40,5 +41,9 @@ export class ToastService {
 
   private displayToast(options: ToastOptions): void {
     this.toastController.create(options).then(toast => toast.present());
+  }
+
+  displayErrorToast(pleaseFillAllRequiredFields: string) {
+    this._pleaseFillAllRequiredFields = pleaseFillAllRequiredFields;
   }
 }
