@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://budget-service.onrender.com",
+    "target": "http://localhost:4200",
     "pathRewrite": {
       "^/api": ""
     },

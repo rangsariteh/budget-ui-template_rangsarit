@@ -45,13 +45,18 @@
     <ion-note slot="end">CHF</ion-note>
   </ion-item>
 
-  <!-- <ion-item>
+  <ion-item>
     <ion-icon name="calendar" slot="start"></ion-icon>
-    <ion-datetime-button datetime="datetime"></ion-datetime-button>
-    <ion-modal>
-      <ion-datetime id="datetime" formControlName="date"></ion-datetime>
-    </ion-modal>
-  </ion-item> -->
+    <ion-datetime-button class="custom-datetime-button" datetime="datetime">
+      Select Date
+    </ion-datetime-button>
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime id="datetime"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+  </ion-item>
+
 
   <!-- Delete Button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
