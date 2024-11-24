@@ -6,11 +6,11 @@ export const environment = {
   backendURL: '/api',
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyCHKc-9GFvrbXMKLlgua2yAtgCibPLddh8',
-    authDomain: 'budget-planner-7eddb.firebaseapp.com',
-    projectId: 'budget-planner-7eddb',
-    appId: '1:278151755192:web:227ae9460314c348be4b4d'
-  }
+    apiKey: 'AIzaSyBP30X3ppCNvD2kbkjh1CDZTgzWtBOBhmY',
+    authDomain: 'budgetui-551c2.firebaseapp.com',
+    projectId: 'budgetui-551c2',
+    appId: '1:802339069212:web:bf981ad6715b7c5fd72ed9'
+  },
 };
 
 /*
