@@ -45,20 +45,17 @@
     <ion-note slot="end">CHF</ion-note>
   </ion-item>
 
-  <!-- <ion-item>
-    <ion-icon name="calendar" slot="start"></ion-icon>
-    <ion-datetime-button class="custom-datetime-button" datetime="datetime">
-      Select Date
-    </ion-datetime-button>
-  <ion-modal [keepContentsMounted]="true">
-    <ng-template>
-      <ion-datetime id="datetime"></ion-datetime>
-    </ng-template>
-  </ion-modal>
-  </ion-item> -->
+    <ion-item>
+      <ion-icon name="calendar" slot="start"></ion-icon>
+      <ion-datetime-button datetime="datetime" class="custom-datetime-button"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
 
-
-  <!-- Delete Button -->
+<!-- Delete Button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="delete()" color="danger">
       <ion-icon name="trash" />

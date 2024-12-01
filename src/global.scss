@@ -17,6 +17,7 @@
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
+@import "@ionic/core/css/ionic.bundle.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -24,6 +25,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
 
 // Hide Arrows From Number Input
 
@@ -48,8 +50,8 @@ input[type="number"] {
 }
 
 .custom-datetime-button {
-  background-color: var(--ion-color-primary, #FFFFFF);
-  color: var(--ion-color-light, white);
-  border-radius: 8px;
-  padding: 10px 20px;
+  background-color: var(--ion-color-light);
+  color: var(--ion-color-primary);
+  border-radius: 10px;
+  padding: 15px 200px;
 }
